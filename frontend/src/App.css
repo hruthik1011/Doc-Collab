@@ -1,0 +1,156 @@
+/* body{
+  overflow-x: hidden;
+}
+html{
+  overflow-x: hidden;
+}
+
+.inputBox{
+  background-color: #EAEAEA;
+  display: flex;
+  align-items: center;
+  border: 1px solid #D1D5DB;
+  border-radius: 5px;
+}
+.inputBox input{
+  flex: 1;
+  background-color: transparent;
+  padding: 10px;
+  border: 5px;
+  padding-left: 0px;
+  outline: 0;
+  border: 0;
+}
+.inputBox i{
+  font-size: 20px;
+  margin-right: 7px;
+  margin-left: 5px;
+}
+
+.inputCon{
+  margin-bottom: 20px;
+}
+.right{
+  width: calc(100% - 30%);
+}
+
+.btnBlue{
+  padding: 10px;
+  color: #fff;
+  min-width: 120px;
+  border-radius: 5px;
+  border: 0;
+  outline: 0;
+  cursor: pointer;
+  background-color: #3B82F6;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+.btnBlue:hover{
+  background-color: #2563eb;
+}
+.btnBlue i{
+  font-size: 20px;
+}
+.jodit-wysiwyg{
+  min-height: calc(100vh - 250px) !important;
+} */
+
+body{
+  overflow-x: hidden;
+  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+}
+html{
+  overflow-x: hidden;
+}
+
+.inputBox{
+  background-color: #f8fafc;
+  display: flex;
+  align-items: center;
+  border: 2px solid #e2e8f0;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.inputBox:focus-within{
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.inputBox input{
+  flex: 1;
+  background-color: transparent;
+  padding: 12px;
+  border: 0;
+  padding-left: 0px;
+  outline: 0;
+  font-size: 14px;
+  color: #374151;
+}
+
+.inputBox input::placeholder{
+  color: #9ca3af;
+}
+
+.inputBox i{
+  font-size: 18px;
+  margin-right: 10px;
+  margin-left: 12px;
+  color: #6b7280;
+}
+
+.inputCon{
+  margin-bottom: 20px;
+}
+
+.right{
+  width: calc(100% - 30%);
+}
+
+.btnBlue{
+  padding: 12px 20px;
+  color: #fff;
+  min-width: 120px;
+  border-radius: 8px;
+  border: 0;
+  outline: 0;
+  cursor: pointer;
+  background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-weight: 600;
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
+.btnBlue:hover{
+  background: linear-gradient(135deg, #1d4ed8 0%, #1e40af 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(59, 130, 246, 0.4);
+}
+
+.btnBlue i{
+  font-size: 18px;
+}
+
+.jodit-wysiwyg{
+  min-height: calc(100vh - 250px) !important;
+}
+
+/* Additional responsive styles */
+@media (max-width: 640px) {
+  .inputBox {
+    border-radius: 6px;
+  }
+  
+  .inputBox input {
+    padding: 10px;
+    font-size: 16px; /* Prevents zoom on iOS */
+  }
+}

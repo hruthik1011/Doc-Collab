@@ -85,4 +85,4 @@ const createDocs = () => {
   )
 }
 
-export default createDocs
+export default createDocs;

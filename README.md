@@ -105,11 +105,6 @@ The application will be available at `http://localhost:5173`
 ## Environment Variables
 
 ### Backend
-```env
-MONGO_URI=mongodb://localhost:27017/doccollab
-JWT_SECRET=your_jwt_secret
-PORT=3000
-```
 
 ## Screenshots
 **SignUp**

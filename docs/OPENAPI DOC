@@ -1,0 +1,287 @@
+openapi: 3.0.0
+info:
+  title: DocCollab API
+  description: API documentation for the DocCollab collaborative document editing platform
+  version: 1.0.0
+  contact:
+    name: hruthik1011
+servers:
+  - url: http://localhost:3000
+    description: Development server
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+  schemas:
+    User:
+      type: object
+      properties:
+        _id:
+          type: string
+          format: uuid
+        username:
+          type: string
+        name:
+          type: string
+        email:
+          type: string
+          format: email
+        isBlocked:
+          type: boolean
+          default: false
+        isAdmin:
+          type: boolean
+          default: false
+        date:
+          type: string
+          format: date-time
+
+    Document:
+      type: object
+      properties:
+        _id:
+          type: string
+          format: uuid
+        title:
+          type: string
+        content:
+          type: string
+        uploadedBy:
+          type: string
+        date:
+          type: string
+          format: date-time
+        lastUpdate:
+          type: string
+          format: date-time
+
+    Error:
+      type: object
+      properties:
+        success:
+          type: boolean
+        message:
+          type: string
+
+paths:
+  /signUp:
+    post:
+      summary: Register a new user
+      tags:
+        - Authentication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - username
+                - name
+                - email
+                - password
+              properties:
+                username:
+                  type: string
+                name:
+                  type: string
+                email:
+                  type: string
+                  format: email
+                password:
+                  type: string
+                  format: password
+      responses:
+        '200':
+          description: User registration successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  message:
+                    type: string
+                  userId:
+                    type: string
+
+  /login:
+    post:
+      summary: Authenticate user and get token
+      tags:
+        - Authentication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - email
+                - password
+              properties:
+                email:
+                  type: string
+                  format: email
+                password:
+                  type: string
+                  format: password
+      responses:
+        '200':
+          description: Login successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  message:
+                    type: string
+                  userId:
+                    type: string
+                  token:
+                    type: string
+
+  /createDoc:
+    post:
+      summary: Create a new document
+      tags:
+        - Documents
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - docName
+                - userId
+              properties:
+                docName:
+                  type: string
+                userId:
+                  type: string
+      responses:
+        '200':
+          description: Document created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  docId:
+                    type: string
+                  message:
+                    type: string
+
+  /getAllDocs:
+    post:
+      summary: Get all documents for a user
+      tags:
+        - Documents
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - userId
+              properties:
+                userId:
+                  type: string
+      responses:
+        '200':
+          description: List of documents
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  docs:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Document'
+
+  /updateDoc:
+    post:
+      summary: Update document content
+      tags:
+        - Documents
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - docId
+                - content
+              properties:
+                docId:
+                  type: string
+                content:
+                  type: string
+      responses:
+        '200':
+          description: Document updated successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  message:
+                    type: string
+
+  /getDoc/{docId}:
+    get:
+      summary: Get a specific document
+      tags:
+        - Documents
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: docId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Document details
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  doc:
+                    $ref: '#/components/schemas/Document'
+
+security:
+  - bearerAuth: []
+
+tags:
+  - name: Authentication
+    description: User authentication endpoints
+  - name: Documents
+    description: Document management endpoints

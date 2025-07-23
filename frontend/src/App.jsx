@@ -4,7 +4,7 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Home from './pages/Home';
 import NoPage from './pages/NoPage';
 import SignUp from './pages/SignUp';
-import Login from './pages/Login';
+import Login from './pages/login';
 import CreateDocs from './pages/createDocs';
 
 const App = () => {
